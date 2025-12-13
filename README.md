@@ -77,3 +77,50 @@ if err != nil {
 data, err := user.GetByUsername("2001")
 ```
 
+
+
+## Functions 
+```go
+user := user.User(db)
+
+---- delete 
+err := user.Delete(ctx, map[string]any{
+    "username": "2001",
+})
+err := user.DeletePk(ctx, "id")
+
+
+--- update 
+err := user.Update(ctx, map[string]any{ // wheres username == 2001
+    "username": "2001",
+}, map[string]any{ //  data
+    "name": "alaa aqeel",
+})
+
+err := user.UpdatePk(ctx, "id", map[string]any{ //  data
+    "name": "alaa aqeel",
+})
+
+---- Insert 
+err := user.Insert(ctx, map[string]any{ //  data
+	"id": "uuid"
+    "name": "alaa aqeel",
+	"username": "alaa_aqeel"
+})
+pk, err := user.InsertPk(ctx, map[string]any{ //  data
+	"id": "uuid"
+    "name": "alaa aqeel",
+	"username": "alaa_aqeel"
+})
+
+err = user.InsertMany(ctx, []string{"name", "username"}, []map[string]any{
+	{
+		"name":     "aqeel",
+		"username": "alaa",
+	},
+	{
+		"name":     "alaa",
+		"username": "aqeel",
+	},
+})
+```
