@@ -1,4 +1,4 @@
-module github.com/alaa-aqeel/go-table
+module github.com/alaa-aqeel/table
 
 go 1.25.1
 
