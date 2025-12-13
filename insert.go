@@ -2,7 +2,6 @@ package table
 
 import (
 	"context"
-	"fmt"
 	"sort"
 )
 
@@ -33,8 +32,6 @@ func (t *SqlTable) InsertMany(ctx context.Context, cols []string, values []map[s
 		for _, col := range cols {
 			vals = append(vals, value[col])
 		}
-		fmt.Println(cols)
-		fmt.Println(vals)
 		q = q.Values(vals...)
 	}
 

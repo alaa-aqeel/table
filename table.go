@@ -3,7 +3,6 @@ package table
 import (
 	"context"
 	"database/sql"
-	"fmt"
 
 	"github.com/Masterminds/squirrel"
 )
@@ -59,7 +58,6 @@ func (t *SqlTable) Row(ctx context.Context, query SquirrelBuilder) (*sql.Row, er
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(sql)
 
 	return t.db.QueryRow(ctx, sql, args...), nil
 }
@@ -69,7 +67,6 @@ func (t *SqlTable) Rows(ctx context.Context, query SquirrelBuilder) (*sql.Rows, 
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(sql)
 
 	return t.db.Query(ctx, sql, args...)
 }
@@ -79,7 +76,6 @@ func (t *SqlTable) Exec(ctx context.Context, query SquirrelBuilder) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(sql)
 
 	return t.db.Exec(ctx, sql, args...)
 }
