@@ -143,7 +143,7 @@ row, err = user.All(ctx, "limit int", "offset int", map[string]any{
 ```
 
 ## Custom 
-Use [Masterminds/squirrel](github.com/Masterminds/squirrel) to build query 
+Use [Masterminds/squirrel](github.com/Masterminds/squirrel) to build query
 ```go
 func (u *UserTable) GetAll(ctx context.Context) ([]UserDto, error) {
 
