@@ -5,6 +5,13 @@ The `SqlTable` type has methods to insert, update, delete and fetch data from th
 It also includes a `Dto` type which is used to define the structure of the data that is fetched from the table.
 The `UserTable` type is an example of how to use the `SqlTable` type to interact with a specific table in the database.
 
+
+# Install
+```sh
+$ go get github.com/alaa-aqeel/table@v0.0.1
+```
+
+
 ## Dto 
 ```go
 type UserDto struct {
