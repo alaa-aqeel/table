@@ -46,6 +46,8 @@ type ITableFetch interface {
 	Find(ctx context.Context, pks any) (IRow, error)
 	One(ctx context.Context, key string, value any) (IRow, error)
 	All(ctx context.Context, limit, offset int, wheres map[string]any) (IRows, error)
+	Filter(ctx context.Context, limit, offset int, wheres any) (IRows, error)
+	Count(ctx context.Context, wheres any) (int64, error)
 }
 
 type ITableInsert interface {
