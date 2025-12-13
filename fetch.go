@@ -2,12 +2,11 @@ package table
 
 import (
 	"context"
-	"database/sql"
 
 	"github.com/Masterminds/squirrel"
 )
 
-func (t *SqlTable) One(ctx context.Context, key string, value any) (*sql.Row, error) {
+func (t *SqlTable) One(ctx context.Context, key string, value any) (IRow, error) {
 	row, err := t.Row(ctx,
 		t.Query().Where(squirrel.Eq{key: value}),
 	)
@@ -15,11 +14,11 @@ func (t *SqlTable) One(ctx context.Context, key string, value any) (*sql.Row, er
 	return row, err
 }
 
-func (t *SqlTable) Find(ctx context.Context, pks any) (*sql.Row, error) {
+func (t *SqlTable) Find(ctx context.Context, pks any) (IRow, error) {
 	return t.One(ctx, t.pk, pks)
 }
 
-func (t *SqlTable) All(ctx context.Context, limit, offset int, wheres map[string]any) (*sql.Rows, error) {
+func (t *SqlTable) All(ctx context.Context, limit, offset int, wheres map[string]any) (IRows, error) {
 	rows, err := t.Rows(ctx,
 		t.
 			Query().
