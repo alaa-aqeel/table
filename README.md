@@ -79,7 +79,9 @@ data, err := user.GetByUsername("2001")
 
 
 
-## Functions 
+# Table Methods 
+
+## Delete
 ```go
 user := user.User(db)
 
@@ -88,8 +90,11 @@ err := user.Delete(ctx, map[string]any{
     "username": "2001",
 })
 err := user.DeletePk(ctx, "id")
+```
 
 
+## Update 
+```go
 --- update 
 err := user.Update(ctx, map[string]any{ // wheres username == 2001
     "username": "2001",
@@ -100,7 +105,10 @@ err := user.Update(ctx, map[string]any{ // wheres username == 2001
 err := user.UpdatePk(ctx, "id", map[string]any{ //  data
     "name": "alaa aqeel",
 })
+```
 
+##  Insert 
+```go
 ---- Insert 
 err := user.Insert(ctx, map[string]any{ //  data
 	"id": "uuid"
@@ -123,4 +131,44 @@ err = user.InsertMany(ctx, []string{"name", "username"}, []map[string]any{
 		"username": "aqeel",
 	},
 })
+```
+
+## Fetch 
+```go 
+row, err = user.Find(ctx, "pk value") // find by pk
+row, err = user.One(ctx, "key", "value") 
+row, err = user.All(ctx, "limit int", "offset int", map[string]any{
+	// wheres
+})
+```
+
+## Custom 
+Use [Masterminds/squirrel](github.com/Masterminds/squirrel) to build query 
+```go
+func (u *UserTable) GetAll(ctx context.Context) ([]UserDto, error) {
+
+	q := u.SqlTable.
+		Query().
+		Columns("name", "username").
+		Where(squirrel.Eq{"active": true})
+
+	rows, err := u.SqlTable.Rows(ctx, q)
+
+	if err != nil {
+		return nil, err
+	}
+
+	var users []UserDto
+	for rows.Next() {
+		var user UserDto
+		err = rows.Scan(&user.Name, &user.Username)
+		if err != nil {
+			return nil, err
+		}
+
+		users = append(users, user)
+	}
+
+	return users, nil
+}
 ```
