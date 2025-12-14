@@ -9,5 +9,5 @@ func (t *SqlTable) Statement() squirrel.StatementBuilderType {
 
 func (t *SqlTable) Query() squirrel.SelectBuilder {
 
-	return t.statement.Select(t.cols).From(t.tableName)
+	return t.statement.Select().From(t.tableName)
 }

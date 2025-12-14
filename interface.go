@@ -43,11 +43,11 @@ type IDb interface {
 }
 
 type ITableFetch interface {
-	Find(ctx context.Context, pks any) (IRow, error)
-	One(ctx context.Context, key string, value any) (IRow, error)
-	All(ctx context.Context, limit, offset int, wheres map[string]any) (IRows, error)
-	Filter(ctx context.Context, limit, offset int, wheres any) (IRows, error)
+	FindPk(ctx context.Context, pks any) (IRow, error)
+	Find(ctx context.Context, key string, value any) (IRow, error)
+	Paginate(ctx context.Context, limit, offset int, wheres any) (IRows, error)
 	Count(ctx context.Context, wheres any) (int64, error)
+	Get(ctx context.Context, wheres any) (IRows, error)
 }
 
 type ITableInsert interface {
